@@ -63,6 +63,28 @@ Hint:
 tertentu
 - Epoch Unix bisa didapatkan dari time()
 ```
+##### Penjelasan soal 2a
+```
+  rawtime = time(NULL);
+  timeinfo = localtime ( &rawtime ); 
+  strcpy (file, "/home/vaniameith/khususoal2/");
+  strftime (lalaland, SIZE, "%Y-%m-%d_%H:%M:%S", timeinfo);
+  strcat (file, lalaland);
+
+    child = fork();
+   if (child == 0) {
+     sleep(30);
+     char *argv[] = {"mkdir","-p",file,NULL};
+     execv("/bin/mkdir", argv);
+   } 
+ ```
+ - `rawtime = time(NULL);`, untuk mengambil local time pada linux.
+ - `timeinfo = localtime ( &rawtime ); `, membuat variabel `timeinfo` untuk menyimpan local waktu yang telah diperoleh.
+ - `strcpy (file, "/home/vaniameith/khususoal2/");`. `strcpy` untuk meng-copy `"/home/vaniameith/khususoal2/"` ke variabel string file.
+ - `strftime (lalaland, SIZE, "%Y-%m-%d_%H:%M:%S", timeinfo);`. `strftime` fungsi untuk format tanggal dan waktu dan diambil dari variable string timeinfo tersebut.
+ - `strcat (file, lalaland);`, untuk menggabungkan isi dalam `file` dan `lalaland`.
+ - ` sleep(30);`, memberikan jeda waktu 30 detik antara pembuatan file/direktori pertama dengan direktori selanjutnya.
+ - `char *argv[] = {"mkdir","-p",file,NULL};`, untuk membuat direktori baru dengan nama format dari `file` berupa timestamp dan isi dari direktori tersebut kosong.
 
 #### SOAL 3
 ```
