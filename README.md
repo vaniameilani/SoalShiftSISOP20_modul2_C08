@@ -92,3 +92,5 @@ Catatan :
 - Gunakan exec dan fork
 - Direktori “.” dan “..” tidak termasuk
 ```
+##### Penjelasan soal 3a
+```
