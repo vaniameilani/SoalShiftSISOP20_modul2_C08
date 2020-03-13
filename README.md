@@ -140,6 +140,41 @@ if (child3 == 0){
     execv("/usr/bin/find", argv);
   }
   ```
+  - `"find","/home/vaniameith/modul2/jpg"`, berfungsi untuk menemukan isi/file/direktori yang sedang dicari dalam direktori/folder jpg.
+  - `"-mindepth","1"`, fungsi yang menandakan bahwa proses masuk ke dalam direktori tujuan sejumlah satu kali saja. Fungsi ini masih berhubungan dengan fungsi `find`. Fungsi ini mengecek semua isi dalam direktori tujuan tersebut.
+  - `"-type","f"`, fungsi ini juga masih berhubungan dengan find dimana menjelaskan kepada proses bahwa untuk mencari isi di dalam direktori tujuan dengan tipe data file.
+  - `"mv",{}","/home/vaniameith/modul2/sedaap"`, untuk memindahkan suatu file yang telah ditemukan tersebut ke direktori/folder sedaap.
+
+```
+child4 = fork();
+  if (child4 == 0){
+    char *argv[] = {"find","/home/vaniameith/modul2/jpg",
+                    "-mindepth","1","-type","d","-exec","mv",
+                    "{}","/home/vaniameith/modul2/indomie",
+                    ";",NULL};
+    execv("/usr/bin/find", argv);
+  }
+  ```
+  Program diatas sama halnya dengan program diatas, perbedaannya adalah menemukan isi dengan tipe data directory/folder dan memindahkannya ke directory/folder indomie.
   
+##### Penjelasan soal 3d
+```
+ child5 = fork();
+  if (child5 == 0){
+    char *argv[] = {"find","/home/vaniameith/modul2/indomie","-mindepth","1","-type","d","-exec","touch","{}/coba1.txt","'\'",";",NULL};
+    execv("/usr/bin/find", argv);
+  }
+```
+- `touch`, command ini berfungsi untuk membuat sebuah file/direktori tanpa isi apapun didalamnya. Dalam soal ini, program diatas membuat file `coba1.txt` ke dalam direktori indomie.
+
+```
+child6 = fork();
+  if (child6 == 0) {
+    sleep(3);
+    char *argv[] = {"find","/home/vaniameith/modul2/indomie","-mindepth","1","-type","d","-exec","touch","{}/coba2.txt","'\'",";",NULL};
+    execv("/usr/bin/find", argv);
+ }
+ ```
+ - program diatas untuk membuat file `coba1.txt` ke dalam direktori indomie.
  
  
