@@ -100,4 +100,46 @@ child = fork();
     execv("/bin/mkdir", argv);
   }
   ```
+  - `child = fork()`, untuk membuat proses baru (child) dengan menduplikasi proses utama.
+  - `child == 0`, bernilai sama dengan 0 untuk menandakan bahwa proses tersebut sukses.
+  - `char *argv[]`, mendeklarasikan sebuah penyimpanan hasil dari proses/perintah di dalamnya.
+  - `"mkdir","-p","/home/vaniameith/modul2/indomie",NULL`. `mkdir` untuk membuat sebuah direktori/folder baru. `-p` yang berarti parent atau path yang berarti membuat semua direktori yang ada mengarah ke direktori baru/yang belum ada sebelumnya. `/home/vaniameith/modul2/indomie` adalah untuk mengarah tempat pembuatan direktori baru di dalam folder modul2 dengan nama indomie.
+  - `execv("/bin/mkdir", argv);`, mengeksekusi argv.
   
+  ```
+  while((waitpid(child,&status,0))>0);
+  child1 = fork();
+  if (child1 == 0) {
+    sleep(5);
+    char *argv[] = {"mkdir","-p","/home/vaniameith/modul2/sedaap",NULL};
+    execv("/bin/mkdir", argv);
+  }
+  ```
+  - `while((waitpid(child,&status,0))>0)`, untuk menunggu child proses untuk berhenti 
+  - `sleep(5)`, untuk memberikan jeda 5 detik dalam pembuatan antara output satu dengan output selanjutnya. Di soal ini, memberikan jeda pembuatan direktori indomie dengan direktori sedaap.
+  - `/home/vaniameith/modul2/sedaap`, membuat direktori baru di dalam modul2 dengan nama sedaap.
+  
+ ##### Penjelasan soal 3b
+ ```
+  child2 = fork();
+  if (child2 == 0) { 
+    char *argv[] = {"unzip","/home/vaniameith/modul2/jpg.zip","-d","/home/vaniameith/modul2",NULL};
+    execv("/usr/bin/unzip", argv);
+  }
+  ```
+  - `unzip -d`, untuk meng-unzip sebuah folder/file 
+  - `"/home/vaniameith/modul2/jpg.zip","-d","/home/vaniameith/modul2"`. `/home/vaniameith/modul2/jpg.zip` untuk menunjukkan letak dari file/folder yang akan di unzip. `/home/vaniameith/modul2` menentukan tempat untuk unzip dari folder tersebut.
+  
+##### Penjelasan soal 3c
+```
+if (child3 == 0){
+    char *argv[] = {"find","/home/vaniameith/modul2/jpg",
+                    "-mindepth","1","-type","f","-exec","mv",
+                    "{}","/home/vaniameith/modul2/sedaap",
+                    ";",NULL};
+    execv("/usr/bin/find", argv);
+  }
+  ```
+  
+ 
+ 
