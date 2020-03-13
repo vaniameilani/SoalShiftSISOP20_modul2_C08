@@ -21,7 +21,23 @@ Contoh: ./program \* 34 7 /home/somi/test.sh
 Program dengan argumen seperti contoh di atas akan menjalankan script test.sh setiap
 detik pada jam 07:34.
 ```
+##### Penjelasan soal 1a
+`int main(int argc, char *argv[]) {
+    int h, m, s;`
+Digunakan untuk menyimpan berapa banyak input yang diberikan, sedangkan argv[] digunakan untuk menyimpan setiap arguman
 
+`if (argc > 5 || argc < 5){
+  printf("Jumlah input harus 4\n");
+  return 0;`
+Digunakan untuk memastikan bahwa hanya ada 4 input yang boleh dimasukkan
+
+##### Penjelasan soal 1b
+`if (h>23 || h<-1) printf ("Input jam harus 0-23\n");
+else if (m>59 || m<-1) printf("Input menit harus 0-59\n");
+else if (s>59 || m<-1) printf("Input detik harus 0-59\n");`
+Output di atas digunakan untuk mengeluarkan pesan error jika range jam di luar 0-23, range menit 0-59, dan range detik 0-59
+
+Kendala : kami masih kebingungan bagaimana cara mengeluarkan output di terminal yang benar, sesuai dengan ketentuan soal
 #### SOAL 2
 ```
 Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang dia
