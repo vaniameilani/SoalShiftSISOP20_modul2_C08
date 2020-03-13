@@ -94,3 +94,10 @@ Catatan :
 ```
 ##### Penjelasan soal 3a
 ```
+child = fork();
+  if (child == 0) {
+    char *argv[] = {"mkdir","-p","/home/vaniameith/modul2/indomie",NULL};
+    execv("/bin/mkdir", argv);
+  }
+  ```
+  
