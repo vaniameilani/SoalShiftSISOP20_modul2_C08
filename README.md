@@ -213,6 +213,6 @@ child6 = fork();
     execv("/usr/bin/find", argv);
  }
  ```
- - program diatas untuk membuat file `coba1.txt` ke dalam direktori indomie.
+ - program diatas untuk membuat file `coba2.txt` ke dalam direktori indomie.
  
  
