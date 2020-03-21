@@ -22,22 +22,108 @@ Program dengan argumen seperti contoh di atas akan menjalankan script test.sh se
 detik pada jam 07:34.
 ```
 ##### Penjelasan soal 1a
-`int main(int argc, char *argv[]) {
-    int h, m, s;`
-Digunakan untuk menyimpan berapa banyak input yang diberikan, sedangkan argv[] digunakan untuk menyimpan setiap arguman
+`int cekangka (char a[]){
+  for (int x = 0; x < strlen(a); x++){
+    if (a[x] < '0' || a[x] > '9'){
+      return 0;
+    }
+  }
+  return 1;
+}`
+Fungsi ini digunakan untuk mengecek input yang dimasukkan adalah angka atau bukan.
 
-`if (argc > 5 || argc < 5){
-  printf("Jumlah input harus 4\n");
-  return 0;`
-Digunakan untuk memastikan bahwa hanya ada 4 input yang boleh dimasukkan
+`int argumen[4];
+    for (int x = 1; x < 4; x++){
+      if (cekangka(argv[x])){
+        argumen[x]=atoi(argv[x]);
+        if (argumen[x] < 0) printf("Input ke %d tidak valid\n", x);`
+Digunakan untuk melakukan comparing, jika yang diinput bukan angka, program tidak bisa dijalankan.
+
+`if (argumen[1] > 59 && argumen [2] > 59 && argumen [3] >23){
+    printf("Input out of range\n");
+    exit(EXIT_FAILURE);`
+Digunakan untuk membatasi nilai input, bahwa batas nilai maksimal detik harus 59, menit 59, dan jam 23. Jika melakukan input di luar batas, program tidak bisa dijalankan.
 
 ##### Penjelasan soal 1b
-`if (h>23 || h<-1) printf ("Input jam harus 0-23\n");
-else if (m>59 || m<-1) printf("Input menit harus 0-59\n");
-else if (s>59 || m<-1) printf("Input detik harus 0-59\n");`
-Output di atas digunakan untuk mengeluarkan pesan error jika range jam di luar 0-23, range menit 0-59, dan range detik 0-59
+`if (argc == 5){
+    int argumen[4];
+    for (int x = 1; x < 4; x++){
+      if (cekangka(argv[x])){
+        argumen[x]=atoi(argv[x]);
+        if (argumen[x] < 0) printf("Input ke %d tidak valid\n", x);
+      }
+      else if (cekbintang(argv[x])) argumen[x] = -1;
+    
+    else{
+      printf("Input ke %d tidak valid\n", x);
+      exit(EXIT_FAILURE);
+    }
+  }`
+`printf("Input ke %d tidak valid\n", x);` yang pertama akan muncul apabila input yang dimasukkan bukan angka. Sedangkan untuk yang kedua akan muncul apabila input yang dimasukkan bukan angka maupun bintang.
+  
+`if (argumen[1] > 59 && argumen [2] > 59 && argumen [3] >23){
+    printf("Input out of range\n");
+    exit(EXIT_FAILURE);`
+`printf("Input out of range\n");` akan muncul apabila input yang dimasukkan di luar range yang telah ditentukan (batas maksima detik adalah 59, menit 59, jam 23).
+ 
+`else{
+printf("Argumen tidak valid\n");
+exit(EXIT_FAILURE);`
 
-Kendala : kami masih kebingungan bagaimana cara mengeluarkan output di terminal yang benar, sesuai dengan ketentuan soal
+`printf("Argumen tidak valid\n");` akan muncul apabila jumlah argumen yang dimasukkan tid.ak sesuai dengan jumlah yang diminta, yaitu 5.
+
+##### Penjelasan soal 1c
+`if (argc == 5)`, argc yang diinput adalah 5, karena soal yang diminta adalah hanya menerima 1 config cron.
+
+##### Penjelasan soal 1d
+`pid_t pid, sid;        // Variabel untuk menyimpan PID
+
+  pid = fork();     // Menyimpan PID dari Child Process
+
+
+  if (pid < 0) {
+    exit(EXIT_FAILURE);
+  }
+
+  if (pid > 0) {
+    exit(EXIT_SUCCESS);
+  }
+
+  umask(0);
+
+  sid = setsid();
+  if (sid < 0) {
+    exit(EXIT_FAILURE);
+  }
+
+  close(STDIN_FILENO);
+  close(STDOUT_FILENO);
+  close(STDERR_FILENO);
+  
+  while(1){
+    time_t t = time(NULL);
+    struct tm* tm = localtime(&t);
+    if ((tm->tm_sec==argumen[1] || argumen[1]==-1) && (tm->tm_min==argumen[2] || argumen[2]==-1) && (tm->tm_hour==argumen[3] || argumen[3]==-1)){
+      pid_t child_id;
+      child_id = fork();
+
+      int status;
+
+      if (child_id == 0){
+        char *argexe[]={"bash", argv[4], NULL};
+        execv("/bin/bash", argexe);
+      }
+    }
+    sleep(1);
+  }
+}`
+Program di atas menunjukkan bahwa program yang dieksekusi berjalan di daemon, menggunakan template daemon yang telah dimodifikasi pada perulangan while(1).
+
+##### Penjelasan soal 1e
+`char *argexe[]={"bash", argv[4], NULL};
+        execv("/bin/bash", argexe);`
+Fungsi di atas digunakan untuk menjalankan program .sh tanpa menggunakan fungsi system().
+
 #### SOAL 2
 ```
 Shisoppu mantappu! itulah yang selalu dikatakan Kiwa setiap hari karena sekarang dia
