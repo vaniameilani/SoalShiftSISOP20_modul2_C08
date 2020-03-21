@@ -80,6 +80,43 @@ tertentu
 - Epoch Unix bisa didapatkan dari time()
 ```
 ##### Penjelasan soal 2a
+nomor 2 menggunakan daemon :
+```
+pid_t pid, sid;        // Variabel untuk menyimpan PID
+  int stat; 
+
+  pid = fork();     // Menyimpan PID dari Child Process
+
+  if (pid < 0) 
+  {
+    exit(EXIT_FAILURE);
+  }
+
+  /* Keluar saat fork berhasil
+  * (nilai variabel pid adalah PID dari child process) */
+  if (pid > 0) 
+  {
+    exit(EXIT_SUCCESS);
+  }
+
+  umask(0);
+
+  sid = setsid();
+  if (sid < 0) 
+  {
+    exit(EXIT_FAILURE);
+  }
+
+  if ((chdir("/")) < 0) 
+  {
+    exit(EXIT_FAILURE);
+  }
+
+  close(STDIN_FILENO);
+  close(STDOUT_FILENO);
+  close(STDERR_FILENO);
+```
+
 ```
   rawtime = time(NULL);
   timeinfo = localtime ( &rawtime ); 
